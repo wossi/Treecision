@@ -57,7 +57,6 @@
 	</dependencies>
 
 	<build>
-		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -74,9 +73,6 @@
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 							<excludeTransitive>true</excludeTransitive>
-							<includes>
-								<include>**/*Test.java</include>
-							</includes>
 						</configuration>
 					</execution>
 				</executions>
@@ -86,9 +82,19 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>install</phase>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -102,9 +108,8 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<parallel>methods</parallel>
-					<threadCount>10</threadCount>
-					<forkMode>pertest</forkMode>
+					<!-- disable concurrency for our CI server -->
+					<!-- <parallel>methods</parallel> <threadCount>4</threadCount> <forkMode>pertest</forkMode> -->
 				</configuration>
 				<executions>
 					<execution>
