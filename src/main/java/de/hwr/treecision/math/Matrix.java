@@ -4,6 +4,10 @@ public class Matrix {
 
     private final int[][] matrix;
 
+    public Matrix(int[][] matrix) {
+	this.matrix = matrix;
+    }
+    
     public Matrix(int columns, int rows) {
 	this.matrix = new int[columns][rows];
     }

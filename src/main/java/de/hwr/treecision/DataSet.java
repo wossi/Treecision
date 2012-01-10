@@ -9,11 +9,22 @@ import com.google.common.collect.HashBiMap;
 
 import de.hwr.treecision.math.Matrix;
 
+/**
+ * Class to handle the data for the decision tree. All attribute values are held as strings and the last attribute is
+ * always the one to decide about.
+ */
 public class DataSet {
 
     ArrayList<String> attributeNames;
     ArrayList<ArrayList<String>> objects;
 
+    /**
+     * Creates a new DataSet from a table.
+     * 
+     * @param table
+     *            The first row of the table should contain the name of the attributes while every row below describes
+     *            an object with its attributes.
+     */
     public DataSet(List<String[]> table) {
 	// extract table header (first line contains the names of the attributes) from table and convert the rest to 2
 	// dimensional array list, which can be modified later very easily
@@ -29,6 +40,12 @@ public class DataSet {
 	}
     }
 
+    /**
+     * Add a new attribute to all objects with a default value.
+     * 
+     * @param name
+     * @param defaultValue
+     */
     public void addAttribute(String name, String defaultValue) {
 	attributeNames.add(name);
 	for (ArrayList<String> object : objects) {
@@ -36,15 +53,32 @@ public class DataSet {
 	}
     }
 
+    /**
+     * Add a new empty object to the data set, all attributes are set to null.
+     * 
+     * @return
+     */
     public int addObject() {
 	return addObject(new ArrayList<String>(attributeNames.size()));
     }
 
+    /**
+     * Add the object to the data set.
+     * 
+     * @param object
+     * @return
+     */
     public int addObject(ArrayList<String> object) {
 	objects.add(object);
 	return objects.size() - 1;
     }
 
+    /**
+     * Change the ordering index of an attribute.
+     * 
+     * @param oldIndex
+     * @param newIndex
+     */
     public void changeAttributeOrder(int oldIndex, int newIndex) {
 	if (newIndex > oldIndex) {
 	    newIndex--;
@@ -55,6 +89,11 @@ public class DataSet {
 	}
     }
 
+    /**
+     * Remove an attribute, the corresponding values.
+     * 
+     * @param index
+     */
     public void removeAttribute(int index) {
 	attributeNames.remove(index);
 	for (ArrayList<String> object : objects) {
@@ -62,10 +101,20 @@ public class DataSet {
 	}
     }
 
+    /** 
+     * Remove an object.
+     * 
+     * @param index
+     */
     public void removeObject(int index) {
 	objects.remove(index);
     }
 
+    /**
+     * Create a bidirectional map which assigns an integer to every attribute value in the data set.
+     * 
+     * @return
+     */
     public BiMap<String, Integer> createConverter() {
 	BiMap<String, Integer> converter = HashBiMap.create();
 	converter.put(null, 0);
@@ -80,9 +129,22 @@ public class DataSet {
 	return converter;
     }
 
-    public Matrix toMatrix() {
-	Matrix matrix = new Matrix(attributeNames.size(), objects.size());
+    /**
+     * Use a bidirectional map to convert the whole data set into an integer matrix.
+     * 
+     * @param converter
+     * @return
+     */
+    public Matrix toMatrix(BiMap<String, Integer> converter) {
+	int[][] matrix = new int[attributeNames.size()][objects.size()];
 
-	return matrix;
+	for (int r = 0; r < objects.size(); r++) {
+	    ArrayList<String> object = objects.get(r);
+	    for (int c = 0; c < object.size(); c++) {
+		matrix[r][c] = converter.get(object.get(c));
+	    }
+	}
+
+	return new Matrix(matrix);
     }
 }
