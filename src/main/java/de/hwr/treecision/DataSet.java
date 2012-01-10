@@ -26,37 +26,33 @@ public class DataSet {
 	    }
 	}
     }
-    
+
     public void addAttribute(String name, String defaultValue) {
 	attributeNames.add(name);
 	for (ArrayList<String> object : objects) {
 	    object.add(defaultValue);
 	}
     }
-    
+
     public int addObject() {
-	ArrayList<String> object = new ArrayList<>(attributeNames.size());
-	for (int i = 0; i < object.size(); i++) {
-	    object.set(i, "");
-	}
-	return addObject(object);
+	return addObject(new ArrayList<String>(attributeNames.size()));
     }
-    
+
     public int addObject(ArrayList<String> object) {
 	objects.add(object);
-	return objects.size()-1;
+	return objects.size() - 1;
     }
-    
+
     public void changeAttributeOrder(int oldIndex, int newIndex) {
 	if (newIndex > oldIndex) {
 	    newIndex--;
 	}
 	attributeNames.add(newIndex, attributeNames.remove(oldIndex));
 	for (ArrayList<String> object : objects) {
-	    object.add(newIndex,object.remove(oldIndex));
+	    object.add(newIndex, object.remove(oldIndex));
 	}
     }
-    
+
     public void removeAttribute(int index) {
 	attributeNames.remove(index);
 	for (ArrayList<String> object : objects) {
@@ -67,10 +63,24 @@ public class DataSet {
     public void removeObject(int index) {
 	objects.remove(index);
     }
-    
-    
-    
+
+    public BiMap<String, Integer> createConverter() {
+	BiMap<String, Integer> converter = new HashBiMap<>();
+	converter.push(null, 0);
+	int n = 1;
+	for (ArrayList<String> object : objects) {
+	    for (int i = 0; i < object.size(); i++) {
+		if (!converter.contains(object.get(i))) {
+		    converter.put(object.get(i), n++);
+		}
+	    }
+	}
+	return converter;
+    }
+
     public Matrix toMatrix() {
+	Matrix matrix = new Matrix(attributeNames.size(), objects.size());
 	
+	return matrix;
     }
 }
