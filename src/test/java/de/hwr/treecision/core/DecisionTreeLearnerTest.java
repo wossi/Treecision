@@ -2,7 +2,7 @@ package de.hwr.treecision.core;
 
 import junit.framework.TestCase;
 
-public class DecisionTreeTest extends TestCase {
+public class DecisionTreeLearnerTest extends TestCase {
 
     public void testDecisionTree() throws Exception {
 	assertTrue(1 != (3 + 25));
