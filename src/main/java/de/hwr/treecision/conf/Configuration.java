@@ -5,10 +5,10 @@ import java.util.HashMap;
 public final class Configuration {
 
     private final HashMap<String, String> confMap = new HashMap<String, String>();
-    
+
     public Configuration() {
     }
-    
+
     // TODO add constructors for GSON serialization with path
 
     public final void set(String key, String value) {

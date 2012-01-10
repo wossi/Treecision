@@ -2,10 +2,12 @@ package de.hwr.treecision;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import de.hwr.treecision.algo.algebra.Matrix;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+import de.hwr.treecision.math.Matrix;
 
 public class DataSet {
 
@@ -16,11 +18,11 @@ public class DataSet {
 	// extract table header (first line contains the names of the attributes) from table and convert the rest to 2
 	// dimensional array list, which can be modified later very easily
 	if (table.size() == 0) {
-	    this.attributeNames = new ArrayList<>();
-	    this.objects = new ArrayList<>();
+	    this.attributeNames = new ArrayList<String>();
+	    this.objects = new ArrayList<ArrayList<String>>();
 	} else {
-	    this.attributeNames = new ArrayList<>(Arrays.asList(table.get(0)));
-	    this.objects = new ArrayList<>(table.size());
+	    this.attributeNames = new ArrayList<String>(Arrays.asList(table.get(0)));
+	    this.objects = new ArrayList<ArrayList<String>>(table.size());
 	    for (int i = 1; i < table.size(); i++) {
 		this.objects.add(new ArrayList<String>(Arrays.asList(table.get(i))));
 	    }
@@ -65,12 +67,12 @@ public class DataSet {
     }
 
     public BiMap<String, Integer> createConverter() {
-	BiMap<String, Integer> converter = new HashBiMap<>();
-	converter.push(null, 0);
+	BiMap<String, Integer> converter = HashBiMap.create();
+	converter.put(null, 0);
 	int n = 1;
 	for (ArrayList<String> object : objects) {
 	    for (int i = 0; i < object.size(); i++) {
-		if (!converter.contains(object.get(i))) {
+		if (!converter.containsKey(object.get(i))) {
 		    converter.put(object.get(i), n++);
 		}
 	    }
@@ -80,7 +82,7 @@ public class DataSet {
 
     public Matrix toMatrix() {
 	Matrix matrix = new Matrix(attributeNames.size(), objects.size());
-	
+
 	return matrix;
     }
 }

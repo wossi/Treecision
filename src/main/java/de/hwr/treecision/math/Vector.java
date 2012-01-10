@@ -1,4 +1,4 @@
-package de.hwr.treecision.algo.algebra;
+package de.hwr.treecision.math;
 
 public class Vector {
 

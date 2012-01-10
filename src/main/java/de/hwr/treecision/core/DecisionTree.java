@@ -1,4 +1,4 @@
-package de.hwr.treecision;
+package de.hwr.treecision.core;
 
 public final class DecisionTree {
 

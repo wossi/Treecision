@@ -6,7 +6,8 @@
 	<classpathentry kind="lib" path="target/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="target/lib/junit-4.8.1.jar"/>
 	<classpathentry kind="lib" path="target/lib/slf4j-log4j12-1.5.2.jar"/>
-	<classpathentry kind="lib" path="lib/opencsv-2.3.jar"/>
 	<classpathentry kind="lib" path="target/lib/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="target/lib/gson-2.1.jar"/>
+	<classpathentry kind="lib" path="target/lib/guava-10.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
