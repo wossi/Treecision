@@ -8,13 +8,13 @@ public class ExcelDataResource implements DataResource {
 
     @Override
     public DataSet readDataSet() throws IOException {
-	// TODO Wossi
+	// TODO jakob
 	return null;
     }
 
     @Override
     public void writeDataSet(DataSet data) throws IOException {
-	// TODO Wossi	
+	// TODO jakob	
     }
 
 }

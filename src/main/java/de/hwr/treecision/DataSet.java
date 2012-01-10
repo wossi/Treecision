@@ -104,7 +104,7 @@ public class DataSet {
      * @return
      */
     public List<String[]> getObjects() {
-	ArrayList<String[]> objs = new ArrayList<>(objects.size());
+	ArrayList<String[]> objs = new ArrayList<String[]>(objects.size());
 	for (ArrayList<String> object : objects) {
 	    objs.add(object.toArray(new String[0]));
 	}
