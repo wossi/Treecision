@@ -50,6 +50,13 @@
 				<artifactId>gson</artifactId>
 				<version>2.1</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>3.7</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -84,6 +91,12 @@
 			<artifactId>gson</artifactId>
 			<version>2.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

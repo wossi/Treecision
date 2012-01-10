@@ -1,18 +1,42 @@
 package de.hwr.treecision.math;
 
-public class Matrix {
+public final class Matrix {
 
     private final int[][] matrix;
+    private final int numRows;
+    private final int numColumns;
 
-    public Matrix(int columns, int rows) {
-	this.matrix = new int[columns][rows];
+    public Matrix(int rows, int columns) {
+	this.matrix = new int[rows][columns];
+	this.numColumns = columns;
+	this.numRows = rows;
     }
 
-    public int get(int col, int row) {
-	return this.matrix[col][row];
+    public final int getRowLength() {
+	return numRows;
     }
 
-    public void set(int col, int row, int value) {
-	this.matrix[col][row] = value;
+    public final int getColumnLength() {
+	return numColumns;
+    }
+
+    public final int get(int row, int col) {
+	return this.matrix[row][col];
+    }
+
+    public final void set(int row, int col, int value) {
+	this.matrix[row][col] = value;
+    }
+
+    public final Vector getRow(int row) {
+	return new Vector(matrix[row]);
+    }
+
+    public final Vector getColumn(int column) {
+	final int[] col = new int[matrix.length];
+	for (int i = 0; i < matrix.length; i++) {
+	    col[i] = matrix[i][column];
+	}
+	return new Vector(col);
     }
 }
