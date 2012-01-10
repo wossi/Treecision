@@ -1,15 +1,16 @@
 package de.hwr.treecision.conf;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
+
+import com.google.gson.Gson;
 
 public final class Configuration {
 
     private final HashMap<String, String> confMap = new HashMap<String, String>();
-
-    public Configuration() {
-    }
-
-    // TODO add constructors for GSON serialization with path
 
     public final void set(String key, String value) {
 	confMap.put(key, value);
@@ -52,6 +53,18 @@ public final class Configuration {
 	} else {
 	    return Boolean.parseBoolean(ret);
 	}
+    }
+
+    public final void saveToFile(Path path) throws IOException {
+	Gson gs = new Gson();
+	String json = gs.toJson(this);
+	Files.write(path, json.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+		StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    public static final Configuration getConfiguration(Path path) throws IOException {
+	Gson gs = new Gson();
+	return gs.fromJson(new String(Files.readAllBytes(path)), Configuration.class);
     }
 
 }
