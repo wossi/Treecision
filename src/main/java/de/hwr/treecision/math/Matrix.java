@@ -1,5 +1,7 @@
 package de.hwr.treecision.math;
 
+import java.util.Arrays;
+
 public final class Matrix {
 
     private final int[][] matrix;
@@ -38,5 +40,15 @@ public final class Matrix {
 	    col[i] = matrix[i][column];
 	}
 	return new Vector(col);
+    }
+
+    @Override
+    public final String toString() {
+	StringBuilder sb = new StringBuilder();
+	int length = getRowLength();
+	for (int i = 0; i < length; i++) {
+	    sb.append(Arrays.toString(matrix[i]));
+	}
+	return sb.toString();
     }
 }

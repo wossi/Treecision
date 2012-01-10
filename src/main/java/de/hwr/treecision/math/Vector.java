@@ -1,5 +1,7 @@
 package de.hwr.treecision.math;
 
+import java.util.Arrays;
+
 public final class Vector {
 
     private final int[] vector;
@@ -34,6 +36,11 @@ public final class Vector {
 	for (int i = 0; i < v.getLength(); i++) {
 	    this.set(i, this.get(i) + v.get(i));
 	}
+    }
+
+    @Override
+    public final String toString() {
+	return Arrays.toString(vector);
     }
 
 }
