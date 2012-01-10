@@ -88,6 +88,28 @@ public class DataSet {
 	    object.add(newIndex, object.remove(oldIndex));
 	}
     }
+    
+    /**
+     * Returns an string array with all names of all attributes.
+     * 
+     * @return
+     */
+    public String[] getAttributeNames() {
+	return attributeNames.toArray(new String[0]);
+    }
+    
+    /**
+     * Returns a list of string arrays where each list item describes an object with its attributes.
+     * 
+     * @return
+     */
+    public List<String[]> getObjects() {
+	ArrayList<String[]> objs = new ArrayList<>(objects.size());
+	for (ArrayList<String> object : objects) {
+	    objs.add(object.toArray(new String[0]));
+	}
+	return objs;
+    }
 
     /**
      * Remove an attribute, the corresponding values.
