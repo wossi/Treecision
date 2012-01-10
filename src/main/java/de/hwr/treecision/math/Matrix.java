@@ -14,6 +14,16 @@ public final class Matrix {
 	this.numRows = rows;
     }
 
+    public Matrix(int[][] otherMatrix) {
+	this.matrix = otherMatrix;
+	this.numRows = otherMatrix.length;
+	if (numRows > 0) {
+	    this.numColumns = otherMatrix[0].length;
+	} else {
+	    this.numColumns = 0;
+	}
+    }
+
     public final int getRowLength() {
 	return numRows;
     }
