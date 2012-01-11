@@ -39,14 +39,15 @@ public class StringMatrix {
 
     public StringMatrix(String[][] matrix) {
 	rows = matrix.length;
+	this.matrix = new ArrayList<>(rows);
 	int maxCols = 0;
 	for (int r = 0; r < rows; r++) {
+	    this.matrix.add(new ArrayList<String>(Arrays.asList(matrix[r])));
 	    if (matrix[r].length > maxCols) {
 		maxCols = matrix[r].length;
 	    }
 	}
 	cols = maxCols;
-	this.matrix = new ArrayList<>(rows);
 	fillUpRows();
     }
 
@@ -55,6 +56,7 @@ public class StringMatrix {
 	matrix = new ArrayList<>(rows);
 	int maxCols = 0;
 	for (int r = 0; r < rows; r++) {
+	    matrix.add(new ArrayList<String>(Arrays.asList(table.get(r))));
 	    if (table.get(r).length > maxCols) {
 		maxCols = table.get(r).length;
 	    }
@@ -67,15 +69,19 @@ public class StringMatrix {
 	addColumn(cols);
     }
 
-    public void addColumn(int position) {
+    public void addColumn(int index) {
 	for (int r = 0; r < rows; r++) {
-	    matrix.get(r).add(position, "");
+	    matrix.get(r).add(index, null);
 	}
 	cols++;
     }
 
     public int addRow() throws MatrixFormatException {
 	return addRow(rows, new ArrayList<String>(cols));
+    }
+
+    public int addRow(ArrayList<String> row) throws MatrixFormatException {
+	return addRow(rows, row);
     }
 
     public int addRow(int position, ArrayList<String> row) throws MatrixFormatException {
@@ -152,11 +158,13 @@ public class StringMatrix {
      */
     public BiMap<String, Integer> createConverter() {
 	BiMap<String, Integer> converter = HashBiMap.create();
+	
 	converter.put(null, 0);
 	converter.put("", -1);
+	
 	int n = 1;
-	for (int r = 1; r < rows; r++) {
-	    for (int c = 0; c < cols; c++) {
+	for (int c = 0; c < cols; c++) {
+	    for (int r = 1; r < rows; r++) {
 		if (!converter.containsKey(get(r, c))) {
 		    converter.put(get(r, c), n++);
 		}
@@ -175,8 +183,8 @@ public class StringMatrix {
     public Matrix toMatrix(BiMap<String, Integer> converter) {
 	int[][] matrix = new int[rows - 1][cols];
 
-	for (int c = 0; c < cols; c++) {
-	    for (int r = 1; r < rows; r++) {
+	for (int r = 1; r < rows; r++) {
+	    for (int c = 0; c < cols; c++) {
 		matrix[r - 1][c] = converter.get(get(r, c));
 	    }
 	}

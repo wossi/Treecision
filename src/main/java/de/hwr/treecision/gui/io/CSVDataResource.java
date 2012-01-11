@@ -3,6 +3,7 @@ package de.hwr.treecision.gui.io;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -22,16 +23,17 @@ public class CSVDataResource implements DataResource {
     }
 
     @Override
-    public DataSet readDataSet() throws IOException {
+    public StringMatrix readDataSet() throws IOException {
 	CSVReader reader = new CSVReader(new FileReader(fileName), seperator);
-	return new DataSet(reader.readAll());
+	return new StringMatrix(reader.readAll());
     }
 
     @Override
-    public void writeDataSet(DataSet data) throws IOException {
+    public void writeDataSet(StringMatrix sm) throws IOException {
 	CSVWriter writer = new CSVWriter(new FileWriter(fileName), seperator);
-	writer.writeNext(data.getAttributeNames());
-	writer.writeAll(data.getObjects());
+	for (ArrayList<String> row : sm.getMatrix()) {
+	    writer.writeNext(row.toArray(new String[0]));
+	}
 	writer.close();
     }
 
