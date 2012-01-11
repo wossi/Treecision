@@ -2,9 +2,9 @@ package de.hwr.treecision.gui.io;
 
 public class MatrixFormatException extends Exception {
 
-    private final String message;
-    
+    private static final long serialVersionUID = 1L;
+
     public MatrixFormatException(String message) {
-	this.message = message;
+	super(message);
     }
 }
