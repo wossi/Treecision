@@ -81,6 +81,23 @@ public class StringMatrixTest extends TestCase {
 	StringMatrix sm = getDefaultTestMatrix();
 	BiMap<String, Integer> converter = sm.createConverter();
 	testDefaultIntegerMatrix(sm.toMatrix(converter));
+	
+	// now with nulls and empty strings
+	sm.set(1,1,null);
+	sm.set(2,3, "");
+	
+	BiMap<String, Integer> converter2 = sm.createConverter();
+	Matrix m = sm.toMatrix(converter2);
+	assertEquals(m.getRowCount(), 2);
+	assertEquals(m.getColumnCount(), 4);
+	assertEquals(m.get(0, 0), 1);
+	assertEquals(m.get(0, 1), 0);
+	assertEquals(m.get(0, 2), 4);
+	assertEquals(m.get(0, 3), 6);
+	assertEquals(m.get(1, 0), 2);
+	assertEquals(m.get(1, 1), 3);
+	assertEquals(m.get(1, 2), 5);
+	assertEquals(m.get(1, 3), -1);
     }
     
     public static StringMatrix getDefaultTestMatrix() {
