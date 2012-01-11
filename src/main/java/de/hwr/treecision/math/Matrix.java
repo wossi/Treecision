@@ -24,11 +24,11 @@ public final class Matrix {
 	}
     }
 
-    public final int getRowLength() {
+    public final int getRowCount() {
 	return numRows;
     }
 
-    public final int getColumnLength() {
+    public final int getColumnCount() {
 	return numColumns;
     }
 
@@ -55,7 +55,7 @@ public final class Matrix {
     @Override
     public final String toString() {
 	StringBuilder sb = new StringBuilder();
-	int length = getRowLength();
+	int length = getRowCount();
 	for (int i = 0; i < length; i++) {
 	    sb.append(Arrays.toString(matrix[i]));
 	}

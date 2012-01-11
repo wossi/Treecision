@@ -147,11 +147,14 @@ public class DataSet {
     /**
      * Create a bidirectional map which assigns an integer to every attribute value in the data set.
      * 
+     * 0 und -1 erklären
+     * 
      * @return
      */
     public BiMap<String, Integer> createConverter() {
 	BiMap<String, Integer> converter = HashBiMap.create();
 	converter.put(null, 0);
+	converter.put("", -1);
 	int n = 1;
 	for (ArrayList<String> object : objects) {
 	    for (int i = 0; i < object.size(); i++) {

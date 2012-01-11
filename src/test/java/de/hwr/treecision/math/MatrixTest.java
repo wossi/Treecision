@@ -7,8 +7,8 @@ public class MatrixTest extends TestCase {
     public void testMatrix() throws Exception {
 	// empty init by col and row sizes
 	Matrix m = new Matrix(2, 2);
-	assertEquals(m.getColumnLength(), 2);
-	assertEquals(m.getRowLength(), 2);
+	assertEquals(m.getColumnCount(), 2);
+	assertEquals(m.getRowCount(), 2);
 	m.set(0, 0, 1);
 	m.set(0, 1, 2);
 	m.set(1, 0, 3);
