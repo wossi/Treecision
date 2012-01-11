@@ -1,4 +1,4 @@
-package de.hwr.treecision;
+package de.hwr.treecision.gui.io;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +44,6 @@ public class DataSet {
      * Add a new attribute to all objects with a default value.
      * 
      * @param name
-     * @param defaultValue
      */
     public void addAttribute(String name, String defaultValue) {
 	attributeNames.add(name);
@@ -59,7 +58,7 @@ public class DataSet {
      * @return
      */
     public int addObject() {
-	return addObject(new ArrayList<String>(attributeNames.size()));
+	return addObject(new String[attributeNames.size()]);
     }
 
     /**
@@ -68,8 +67,8 @@ public class DataSet {
      * @param object
      * @return
      */
-    public int addObject(ArrayList<String> object) {
-	objects.add(object);
+    public int addObject(String[] object) {
+	objects.add(new ArrayList<String>(Arrays.asList(object)));
 	return objects.size() - 1;
     }
 
@@ -109,6 +108,19 @@ public class DataSet {
 	    objs.add(object.toArray(new String[0]));
 	}
 	return objs;
+    }
+    
+    /**
+     * Get a specific object.
+     * 
+     * @param index
+     * @return
+     */
+    public String[] getObject(int index) {
+	if (index >= objects.size()) {
+	    return null;
+	}
+	return objects.get(index).toArray(new String[0]);
     }
 
     /**

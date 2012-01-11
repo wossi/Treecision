@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
-import de.hwr.treecision.DataSet;
 
 public class CSVDataResource implements DataResource {
 

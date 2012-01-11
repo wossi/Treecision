@@ -2,7 +2,6 @@ package de.hwr.treecision.gui.io;
 
 import java.io.IOException;
 
-import de.hwr.treecision.DataSet;
 
 public class ExcelDataResource implements DataResource {
 
