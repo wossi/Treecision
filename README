@@ -1,1 +1,10 @@
-This is a Java implementation of a binary classification decision tree. It offers a fast console based algorithm as well as a cool GUI.
+<<<<< CURRENTLY UNDER DEVELOPMENT >>>>>
+
+This is a Java implementation of a binary classification (decision) tree. 
+
+It offers a fast console based algorithm as well as a cool GUI.
+
+Requirements:
+
+ - Maven 3.x
+ - Java 7 
