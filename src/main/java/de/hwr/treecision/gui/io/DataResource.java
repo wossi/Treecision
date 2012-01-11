@@ -5,8 +5,8 @@ import java.io.IOException;
 
 public interface DataResource {
 
-    public StringMatrix readDataSet() throws IOException;
+    public StringMatrix readStringMatrix() throws IOException;
 
-    public void writeDataSet(StringMatrix sm) throws IOException;
+    public void writeStringMatrix(StringMatrix sm) throws IOException;
 
 }

@@ -23,13 +23,13 @@ public class CSVDataResource implements DataResource {
     }
 
     @Override
-    public StringMatrix readDataSet() throws IOException {
+    public StringMatrix readStringMatrix() throws IOException {
 	CSVReader reader = new CSVReader(new FileReader(fileName), seperator);
 	return new StringMatrix(reader.readAll());
     }
 
     @Override
-    public void writeDataSet(StringMatrix sm) throws IOException {
+    public void writeStringMatrix(StringMatrix sm) throws IOException {
 	CSVWriter writer = new CSVWriter(new FileWriter(fileName), seperator);
 	for (ArrayList<String> row : sm.getMatrix()) {
 	    writer.writeNext(row.toArray(new String[0]));

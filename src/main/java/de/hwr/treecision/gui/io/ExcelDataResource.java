@@ -6,13 +6,13 @@ import java.io.IOException;
 public class ExcelDataResource implements DataResource {
 
     @Override
-    public StringMatrix readDataSet() throws IOException {
+    public StringMatrix readStringMatrix() throws IOException {
 	// TODO jakob
 	return null;
     }
 
     @Override
-    public void writeDataSet(StringMatrix sm) throws IOException {
+    public void writeStringMatrix(StringMatrix sm) throws IOException {
 	// TODO jakob	
     }
 
