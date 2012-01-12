@@ -8,7 +8,7 @@ import de.hwr.treecision.math.Vector;
 public final class EntropyCalculator {
 
     static final double LOG_BASE_TWO = Math.log(2);
-    private final static HashSet<Integer> alreadyUsedIndicesList = new HashSet<Integer>();
+    private static final HashSet<Integer> alreadyUsedIndicesList = new HashSet<Integer>();
 
     /**
      * Returns the index of a feature which has the highest entropy and wasn't used before.

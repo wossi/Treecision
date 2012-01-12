@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import junit.framework.TestCase;
-
-import com.google.common.collect.BiMap;
-
 import de.hwr.treecision.math.Matrix;
 
 public class StringMatrixTest extends TestCase {

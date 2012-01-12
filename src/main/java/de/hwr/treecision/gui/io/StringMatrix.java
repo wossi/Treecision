@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
 import de.hwr.treecision.math.Matrix;
 
 public final class StringMatrix {
@@ -128,21 +125,21 @@ public final class StringMatrix {
 	}
     }
 
-    public void moveColumnToEnd(int index) {
+    public final void moveColumnToEnd(int index) {
 	for (ArrayList<String> row : matrix) {
 	    row.add(row.remove(index));
 	}
     }
 
-    public void set(int row, int col, String value) {
+    public final void set(int row, int col, String value) {
 	matrix.get(row).set(col, value);
     }
 
-    public String toString() {
+    public final String toString() {
 	return matrix.toString();
     }
 
-    private void fillUpRows() {
+    private final void fillUpRows() {
 	for (ArrayList<String> row : matrix) {
 	    while (row.size() > cols) {
 		row.add(null);
@@ -158,7 +155,7 @@ public final class StringMatrix {
      * 
      * @return
      */
-    public String[][] createValueMatrix() {
+    public final String[][] createValueMatrix() {
 	String[][] valueMatrix = new String[cols][];
 
 	for (int c = 0; c < cols; c++) {
@@ -185,7 +182,7 @@ public final class StringMatrix {
      * @param valueMatrix
      * @return
      */
-    public Matrix toMatrix(String[][] valueMatrix) {
+    public final Matrix toMatrix(String[][] valueMatrix) {
 	int[][] matrix = new int[rows - 1][cols];
 
 	for (int c = 0; c < cols; c++) {

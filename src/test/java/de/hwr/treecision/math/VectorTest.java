@@ -33,6 +33,8 @@ public class VectorTest extends TestCase {
 	// fast lookup test
 	Vector vxx = new Vector(new int[] { 0, 1, 2, 3 });
 	assertEquals(vxx.getNumberOfDistinctElementsFast(), 4);
+	int[] array = vxx.toArray();
+	assertEquals(array.length, 4);
     }
 
     public void testVectorSummation() throws Exception {

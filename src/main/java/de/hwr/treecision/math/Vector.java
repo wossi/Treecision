@@ -62,6 +62,10 @@ public final class Vector {
 	    this.set(i, this.get(i) + v.get(i));
 	}
     }
+    
+    public final int[] toArray(){
+	return vector;
+    }
 
     @Override
     public final String toString() {

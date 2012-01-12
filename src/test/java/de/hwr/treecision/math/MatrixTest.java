@@ -1,6 +1,7 @@
 package de.hwr.treecision.math;
 
 import junit.framework.TestCase;
+import de.hwr.treecision.util.Tuple;
 
 public class MatrixTest extends TestCase {
 
@@ -19,6 +20,15 @@ public class MatrixTest extends TestCase {
 	// init by matrix like constructor
 	m = new Matrix(new int[][] { { 1, 2 }, { 3, 4 }, });
 	equalityTests(m);
+    }
+
+    public void testMatrixSplit() throws Exception {
+	Matrix m = new Matrix(new int[][] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 }, { 9, 10 }, { 1, 2 }, { 3, 4 },
+		{ 5, 6 }, { 7, 8 }, { 9, 10 } });
+
+	Tuple<Matrix, Matrix> randomSubmatrix = m.splitRandomMatrices(0.2f);
+	assertEquals(randomSubmatrix.getFirst().getRowCount(), 8);
+	assertEquals(randomSubmatrix.getSecond().getRowCount(), 2);
     }
 
     /**
