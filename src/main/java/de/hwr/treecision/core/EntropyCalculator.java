@@ -11,12 +11,25 @@ public final class EntropyCalculator {
     private static final HashSet<Integer> alreadyUsedIndicesList = new HashSet<Integer>();
 
     /**
-     * Returns the index of a feature which has the highest entropy and wasn't used before.
+     * Uses internal tracking of what attributes have been returned in this method.
+     * 
+     * @param inputFeatures
+     * @param outputVariables
+     * @return
+     */
+    public final int getIndexWithMaxEntropy(Matrix inputFeatures, Vector outputVariables) {
+	return getIndexWithMaxEntropy(inputFeatures, outputVariables, alreadyUsedIndicesList);
+    }
+
+    /**
+     * Returns the index of a feature which has the highest entropy and wasn't used before. This method can be used for
+     * external tracking of what attributes have been returned to filter.
      * 
      * @return -1 if all features has been examined from outside. >=0 index of what attribute in feature should be used
      *         next. (based on max entropy).
      */
-    public final int getIndexWithMaxEntropy(Matrix inputFeatures, Vector outputVariables) {
+    public final int getIndexWithMaxEntropy(Matrix inputFeatures, Vector outputVariables,
+	    HashSet<Integer> alreadyUsedIndicesList) {
 	final int columns = inputFeatures.getColumnCount();
 
 	int maxEntropyIndex = -1;
