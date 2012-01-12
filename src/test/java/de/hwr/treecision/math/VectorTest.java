@@ -14,6 +14,7 @@ public class VectorTest extends TestCase {
 	v.set(1, 3);
 	assertEquals(v.get(0), 2);
 	assertEquals(v.get(1), 3);
+	assertEquals(v.getNumberOfDistinctElements(), 2);
 
 	try {
 	    v.set(3, 0);
@@ -27,6 +28,11 @@ public class VectorTest extends TestCase {
 	assertEquals(vx.getLength(), 2);
 	assertEquals(vx.get(0), 2);
 	assertEquals(vx.get(1), 3);
+	assertEquals(v.getNumberOfDistinctElements(), 2);
+
+	// fast lookup test
+	Vector vxx = new Vector(new int[] { 1, 2, 3 });
+	assertEquals(vxx.getNumberOfDistinctElementsFast(), 3);
     }
 
     public void testVectorSummation() throws Exception {

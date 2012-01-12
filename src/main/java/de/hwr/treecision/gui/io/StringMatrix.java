@@ -9,11 +9,11 @@ import com.google.common.collect.HashBiMap;
 
 import de.hwr.treecision.math.Matrix;
 
-public class StringMatrix {
+public final class StringMatrix {
 
     private int rows;
     private int cols;
-    private ArrayList<ArrayList<String>> matrix;
+    private final ArrayList<ArrayList<String>> matrix;
 
     public StringMatrix(int rows, int cols) {
 	this.rows = rows;
@@ -65,26 +65,26 @@ public class StringMatrix {
 	fillUpRows();
     }
 
-    public void addColumn() {
+    public final void addColumn() {
 	addColumn(cols);
     }
 
-    public void addColumn(int index) {
+    public final void addColumn(int index) {
 	for (int r = 0; r < rows; r++) {
 	    matrix.get(r).add(index, null);
 	}
 	cols++;
     }
 
-    public int addRow() throws MatrixFormatException {
+    public final int addRow() throws MatrixFormatException {
 	return addRow(rows, new ArrayList<String>(cols));
     }
 
-    public int addRow(ArrayList<String> row) throws MatrixFormatException {
+    public final int addRow(ArrayList<String> row) throws MatrixFormatException {
 	return addRow(rows, row);
     }
 
-    public int addRow(int position, ArrayList<String> row) throws MatrixFormatException {
+    public final int addRow(int position, ArrayList<String> row) throws MatrixFormatException {
 	if (row.size() < cols) {
 	    throw new MatrixFormatException("Row (1x" + row.size() + " doesn't match the matrix size (" + rows + "x"
 		    + cols + ")");
@@ -93,35 +93,35 @@ public class StringMatrix {
 	return rows++;
     }
 
-    public boolean equals(StringMatrix otherMatrix) {
+    public final boolean equals(StringMatrix otherMatrix) {
 	return otherMatrix.getMatrix().equals(matrix);
     }
 
-    public String get(int row, int col) {
+    public final String get(int row, int col) {
 	return matrix.get(row).get(col);
     }
 
-    public ArrayList<ArrayList<String>> getMatrix() {
+    public final ArrayList<ArrayList<String>> getMatrix() {
 	return matrix;
     }
 
-    public ArrayList<String> getRow(int index) {
+    public final ArrayList<String> getRow(int index) {
 	return matrix.get(index);
     }
 
-    public ArrayList<String> getHeaderRow() {
+    public final ArrayList<String> getHeaderRow() {
 	return matrix.get(0);
     }
 
-    public int getRowCount() {
+    public final int getRowCount() {
 	return rows;
     }
 
-    public int getColumnCount() {
+    public final int getColumnCount() {
 	return cols;
     }
 
-    public void moveColumn(int oldPosition, int newPosition) {
+    public final void moveColumn(int oldPosition, int newPosition) {
 	for (ArrayList<String> row : matrix) {
 	    row.add(newPosition, row.remove(oldPosition));
 	}
@@ -151,18 +151,18 @@ public class StringMatrix {
 
     /**
      * Creates a bidirectional map which assigns every string in the matrix to an integer. Same strings get the same
-     * number. Null strings are assigned to 0 and empty string get -1. The first row of the matrix - mean to be the
+     * number. Null strings are assigned to -1 and empty string get -2. The first row of the matrix - mean to be the
      * header row - is ignored.
      * 
-     * @return
+     * @return a bimap which contains the mapping between integers and their names.
      */
     public BiMap<String, Integer> createConverter() {
 	BiMap<String, Integer> converter = HashBiMap.create();
-	
-	converter.put(null, 0);
-	converter.put("", -1);
-	
-	int n = 1;
+	// not allowed entries are negative because we want to use arrays, and they start at 0.
+	converter.put(null, -1);
+	converter.put("", -2);
+
+	int n = 0;
 	for (int c = 0; c < cols; c++) {
 	    for (int r = 1; r < rows; r++) {
 		if (!converter.containsKey(get(r, c))) {

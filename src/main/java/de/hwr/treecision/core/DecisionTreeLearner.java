@@ -6,6 +6,13 @@ import de.hwr.treecision.math.Vector;
 
 public final class DecisionTreeLearner {
 
+    private final EntropyCalculator calc;
+
+    public DecisionTreeLearner() {
+	super();
+	this.calc = new EntropyCalculator();
+    }
+
     /**
      * For ml-class.org mates inputFeatures is equal to "X" whereas outputVariable is equal to "y" in octave excersises.
      * 
