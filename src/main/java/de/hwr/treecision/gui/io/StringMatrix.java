@@ -2,6 +2,7 @@ package de.hwr.treecision.gui.io;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.BiMap;
@@ -170,6 +171,7 @@ public final class StringMatrix {
 		    }
 		}
 	    }
+	    Collections.sort(values);
 	    valueMatrix[c] = values.toArray(new String[0]);
 	}
 

@@ -101,8 +101,8 @@ public class StringMatrixTest extends TestCase {
 	assertEquals(converter[2][0], "20");
 	assertEquals(converter[2][1], "25");
 	assertEquals(converter[3][0], "1.7m");
-	assertEquals(converter[3][1], "1.8m");
-	assertEquals(converter[3][2], "1.85m");
+	assertEquals(converter[3][1], "1.85m");
+	assertEquals(converter[3][2], "1.8m");
 	assertEquals(converter[4][0], "0");
 	assertEquals(converter[4][1], "1");
 
@@ -119,8 +119,8 @@ public class StringMatrixTest extends TestCase {
 	assertEquals(m.get(1, 2), 0);
 	assertEquals(m.get(2, 2), 1);
 	assertEquals(m.get(0, 3), 0);
-	assertEquals(m.get(1, 3), 1);
-	assertEquals(m.get(2, 3), 2);
+	assertEquals(m.get(1, 3), 2);
+	assertEquals(m.get(2, 3), 1);
 	assertEquals(m.get(0, 4), 0);
 	assertEquals(m.get(1, 4), 1);
 	assertEquals(m.get(2, 4), 0);
