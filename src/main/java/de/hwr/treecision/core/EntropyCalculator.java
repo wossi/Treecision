@@ -1,14 +1,38 @@
 package de.hwr.treecision.core;
 
+import java.util.HashSet;
+
 import de.hwr.treecision.math.Matrix;
 import de.hwr.treecision.math.Vector;
 
 public final class EntropyCalculator {
 
     static final double LOG_BASE_TWO = Math.log(2);
+    private final static HashSet<Integer> alreadyUsedIndicesList = new HashSet<Integer>();
 
+    /**
+     * Returns the index of a feature which has the highest entropy and wasn't used before.
+     * 
+     * @return -1 if all features has been examined from outside. >=0 index of what attribute in feature should be used
+     *         next. (based on max entropy).
+     */
     public final int getIndexWithMaxEntropy(Matrix inputFeatures, Vector outputVariables) {
-	return 0;
+	final int columns = inputFeatures.getColumnCount();
+
+	int maxEntropyIndex = -1;
+	double highestEntropy = 0.0d;
+	for (int i = 0; i < columns; i++) {
+	    if (alreadyUsedIndicesList.contains(i)) {
+		final double weightedEntropySum = getWeightedEntropySum(inputFeatures.getColumn(i), outputVariables);
+		if (weightedEntropySum > highestEntropy) {
+		    highestEntropy = weightedEntropySum;
+		    maxEntropyIndex = i;
+		}
+	    }
+	}
+
+	alreadyUsedIndicesList.add(maxEntropyIndex);
+	return maxEntropyIndex;
     }
 
     public final double getWeightedEntropySum(Vector attributeColumn, Vector outputVariables) {
