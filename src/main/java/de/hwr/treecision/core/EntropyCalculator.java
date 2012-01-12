@@ -5,7 +5,7 @@ import de.hwr.treecision.math.Vector;
 
 public final class EntropyCalculator {
 
-    private static final double LOG_BASE_TWO = Math.log(2);
+    static final double LOG_BASE_TWO = Math.log(2);
 
     public final int getIndexWithMaxEntropy(Matrix inputFeatures, Vector outputVariables) {
 	return 0;
@@ -38,11 +38,12 @@ public final class EntropyCalculator {
 	for (int i = 0; i < distinctAttributes; i++) {
 	    // only working for binary classification
 	    // DANGER! Sophisticated math function incoming!
-	    weightedEntropySum += (attributeCount[i] / length)
-		    * ((-(preditionCount[i][0] / attributeCount[i]) * (Math.log(preditionCount[i][0]
-			    / attributeCount[i]) / LOG_BASE_TWO)) - (-(preditionCount[i][1] / attributeCount[i]) * (Math
-			    .log(preditionCount[i][1] / attributeCount[i]) / LOG_BASE_TWO)));
+	    weightedEntropySum += ((double) attributeCount[i] / (double) length)
+		    * (((-(double) preditionCount[i][0] / (double) attributeCount[i]) * (Math
+			    .log((double) preditionCount[i][0] / (double) attributeCount[i]) / LOG_BASE_TWO)) - ((-(double) preditionCount[i][1] / (double) attributeCount[i]) * (Math
+			    .log((double) preditionCount[i][1] / (double) attributeCount[i]) / LOG_BASE_TWO)));
 	}
-	return weightedEntropySum;
+	// we have to absolute our calculation because negative values make no sense in probability.
+	return Math.abs(weightedEntropySum);
     }
 }

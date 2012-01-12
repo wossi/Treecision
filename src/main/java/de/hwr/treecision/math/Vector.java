@@ -44,7 +44,8 @@ public final class Vector {
 		high = j;
 	    }
 	}
-	return high;
+	// +1 because of zero
+	return high + 1;
     }
 
     public final void set(int index, int value) {
