@@ -150,42 +150,50 @@ public final class StringMatrix {
     }
 
     /**
-     * Creates a bidirectional map which assigns every string in the matrix to an integer. Same strings get the same
-     * number. Null strings are assigned to -1 and empty string get -2. The first row of the matrix - mean to be the
-     * header row - is ignored.
+     * Creates a matrix containing all attribute values. The first dimension is the attribute (equal to the column in
+     * the string matrix) while the second is an index for each possible value. Same values of the same attribute have
+     * the same index. The first line of the string matrix - meaned to be the header row - is ignored and empty or null
+     * values, too.
      * 
-     * @return a bimap which contains the mapping between integers and their names.
+     * @return
      */
-    public BiMap<String, Integer> createConverter() {
-	BiMap<String, Integer> converter = HashBiMap.create();
-	// not allowed entries are negative because we want to use arrays, and they start at 0.
-	converter.put(null, -1);
-	converter.put("", -2);
+    public String[][] createValueMatrix() {
+	String[][] valueMatrix = new String[cols][];
 
-	int n = 0;
 	for (int c = 0; c < cols; c++) {
+	    ArrayList<String> values = new ArrayList<>();
 	    for (int r = 1; r < rows; r++) {
-		if (!converter.containsKey(get(r, c))) {
-		    converter.put(get(r, c), n++);
+		String value = get(r, c);
+		if (value != null && !value.isEmpty()) {
+		    if (!values.contains(value)) {
+			values.add(value);
+		    }
 		}
 	    }
+	    valueMatrix[c] = values.toArray(new String[0]);
 	}
-	return converter;
+
+	return valueMatrix;
     }
 
     /**
-     * Use a bidirectional map to convert the StringMatrix to an matrix of integers. The first row of the matrix - mean
-     * to be the header row - is ignored.
+     * Use a value matrix to convert the string matrix to an matrix of integers. The first row of the matrix - mean to
+     * be the header row - is ignored.
      * 
-     * @param converter
+     * @param valueMatrix
      * @return
      */
-    public Matrix toMatrix(BiMap<String, Integer> converter) {
+    public Matrix toMatrix(String[][] valueMatrix) {
 	int[][] matrix = new int[rows - 1][cols];
 
-	for (int r = 1; r < rows; r++) {
-	    for (int c = 0; c < cols; c++) {
-		matrix[r - 1][c] = converter.get(get(r, c));
+	for (int c = 0; c < cols; c++) {
+	    for (int r = 1; r < rows; r++) {
+		String value = get(r, c);
+		if (value == null || value.isEmpty()) {
+		    matrix[r - 1][c] = -1;
+		} else {
+		    matrix[r - 1][c] = Arrays.binarySearch(valueMatrix[c], value);
+		}
 	    }
 	}
 
