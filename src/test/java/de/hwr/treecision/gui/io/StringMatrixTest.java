@@ -15,10 +15,10 @@ public class StringMatrixTest extends TestCase {
 
     public void testConstructors() {
 	// test array list constructor
-	ArrayList<ArrayList<String>> matrix = new ArrayList<>(3);
-	matrix.add(new ArrayList<>(Arrays.asList(tr1)));
-	matrix.add(new ArrayList<>(Arrays.asList(tr2)));
-	matrix.add(new ArrayList<>(Arrays.asList(tr3)));
+	ArrayList<ArrayList<String>> matrix = new ArrayList<ArrayList<String>>(3);
+	matrix.add(new ArrayList<String>(Arrays.asList(tr1)));
+	matrix.add(new ArrayList<String>(Arrays.asList(tr2)));
+	matrix.add(new ArrayList<String>(Arrays.asList(tr3)));
 	testDefaultMatrix(new StringMatrix(matrix));
 
 	// test string array constructor
@@ -26,7 +26,7 @@ public class StringMatrixTest extends TestCase {
 	testDefaultMatrix(new StringMatrix(array));
 
 	// test string array list constructor
-	ArrayList<String[]> list = new ArrayList<>(3);
+	ArrayList<String[]> list = new ArrayList<String[]>(3);
 	list.add(tr1);
 	list.add(tr2);
 	list.add(tr3);
@@ -82,8 +82,8 @@ public class StringMatrixTest extends TestCase {
 	sm.set(3, 1, "Peter");
 	testManipulatedDefaultMatrix(sm);
 	sm.set(2, 1, "");
-	sm.set(3, 1, null);	
-	
+	sm.set(3, 1, null);
+
 	String[][] converter = sm.createValueMatrix();
 	assertEquals(converter.length, 5); // five attributes
 	assertEquals(converter[0].length, 2); // f, m
@@ -91,7 +91,7 @@ public class StringMatrixTest extends TestCase {
 	assertEquals(converter[2].length, 2); // 20, 25
 	assertEquals(converter[3].length, 3); // 1.7m, 1.8m, 1.85m
 	assertEquals(converter[4].length, 2); // 0, 1
-	
+
 	assertEquals(converter[0][0], "f");
 	assertEquals(converter[0][1], "m");
 	assertEquals(converter[1][0], "Mandy");

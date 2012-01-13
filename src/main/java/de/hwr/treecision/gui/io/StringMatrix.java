@@ -16,7 +16,7 @@ public final class StringMatrix {
     public StringMatrix(int rows, int cols) {
 	this.rows = rows;
 	this.cols = cols;
-	matrix = new ArrayList<>(rows);
+	matrix = new ArrayList<ArrayList<String>>(rows);
 	for (int r = 0; r < rows; r++) {
 	    matrix.add(new ArrayList<String>(cols));
 	}
@@ -37,7 +37,7 @@ public final class StringMatrix {
 
     public StringMatrix(String[][] matrix) {
 	rows = matrix.length;
-	this.matrix = new ArrayList<>(rows);
+	this.matrix = new ArrayList<ArrayList<String>>(rows);
 	int maxCols = 0;
 	for (int r = 0; r < rows; r++) {
 	    this.matrix.add(new ArrayList<String>(Arrays.asList(matrix[r])));
@@ -51,7 +51,7 @@ public final class StringMatrix {
 
     public StringMatrix(List<String[]> table) {
 	rows = table.size();
-	matrix = new ArrayList<>(rows);
+	matrix = new ArrayList<ArrayList<String>>(rows);
 	int maxCols = 0;
 	for (int r = 0; r < rows; r++) {
 	    matrix.add(new ArrayList<String>(Arrays.asList(table.get(r))));
@@ -135,6 +135,7 @@ public final class StringMatrix {
 	matrix.get(row).set(col, value);
     }
 
+    @Override
     public final String toString() {
 	return matrix.toString();
     }
@@ -159,7 +160,7 @@ public final class StringMatrix {
 	String[][] valueMatrix = new String[cols][];
 
 	for (int c = 0; c < cols; c++) {
-	    ArrayList<String> values = new ArrayList<>();
+	    ArrayList<String> values = new ArrayList<String>();
 	    for (int r = 1; r < rows; r++) {
 		String value = get(r, c);
 		if (value != null && !value.isEmpty()) {
