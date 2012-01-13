@@ -3,6 +3,8 @@ package de.hwr.treecision.gui.io;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -24,6 +26,10 @@ public final class CSVDataResource implements DataResource {
 
     @Override
     public final StringMatrix readStringMatrix() throws IOException {
+	if (Files.notExists(Paths.get(fileName))) {
+	    return new StringMatrix(0, 0);
+	}
+	
 	CSVReader reader = new CSVReader(new FileReader(fileName), seperator);
 	return new StringMatrix(reader.readAll());
     }
